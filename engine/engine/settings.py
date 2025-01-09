@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-#STATIC_ROOT= '/var/www/database.gabrielchiorcea.tech/database/static/'
 #STATIC_URL = 'static/'
 
 
@@ -150,6 +149,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT= '/var/www/database.gabrielchiorcea.tech/database/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Calea către fișierele statice
 ]
