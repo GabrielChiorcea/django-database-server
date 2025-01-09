@@ -9,6 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+#STATIC_ROOT= '/var/www/database.gabrielchiorcea.tech/database/static/'
+#STATIC_URL = 'static/'
+
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -80,7 +83,7 @@ ROOT_URLCONF = 'engine.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,11 +105,11 @@ WSGI_APPLICATION = 'engine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'engine',
-        'USER': 'gabi',
-        'PASSWORD': '@Eva1Japo2@',
-        'HOST': '185.146.86.206',  # Set to 'localhost' if the database is on the same machine
-        'PORT': '3306',  # Set to '' for default
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_PSWD'),
+        'PORT': '3306',  
     }
 }
 
@@ -144,8 +147,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_ROOT= '/var/www/database.gabrielchiorcea.tech/database/static/'
-STATIC_URL = 'static/'
+
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Calea către fișierele statice
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
