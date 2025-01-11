@@ -11,3 +11,10 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SetNr(models.Model):
+    nrs = models.IntegerField()
+
+    def __str__(self):
+        return str(self.nr)

@@ -34,6 +34,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS= ["http://database.gabrielchiorcea.tech"]
+
+CSRF_COOKIE_SECURE = False
+CORS_ALLOWED_ORIGINS = ["http://database.gabrielchiorcea.tech"]
+
+
 
 REST_FRAMEWORK = {  
     "DEFAULT_AUTHENTICATION_CLASSES":(
@@ -70,7 +76,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -106,8 +112,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_PSWD'),
+        'PASSWORD': os.getenv('DB_PSWD'),
+        'HOST': os.getenv('DB_HOST'),
         'PORT': '3306',  
     }
 }
@@ -151,7 +157,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT= '/var/www/database.gabrielchiorcea.tech/database/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Calea către fișierele statice
+     os.path.join(BASE_DIR, 'static'),  # Calea către fișierele statice
 ]
 
 # Default primary key field type
@@ -161,3 +167,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+
+if DEBUG:
+    CSRF_COOKIE_SECURE = False
+    CSRF_TRUSTED_ORIGINS = []
+    CSRF_COOKIE_HTTPONLY = False
+    CSRF_USE_SESSIONS = False
